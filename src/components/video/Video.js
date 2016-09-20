@@ -128,6 +128,22 @@ var Video = React.createClass({
     },
 
     /**
+     * Adjust playback rate
+     * @param rate
+     */
+    setPlaybackRate(rate) {
+        this.videoEl.playbackRate = rate;
+    },
+
+    /**
+     * Retrieve current playback rate
+     * @returns {*|Number}
+     */
+    getPlaybackRate() {
+        return this.videoEl.playbackRate;
+    },
+
+    /**
      * Toggles the video to mute and unmute.
      * @return {undefined}
      */
@@ -199,7 +215,7 @@ var Video = React.createClass({
      * Seeks the video timeline.
      * @param  {number} time The value in seconds to seek to
      * @param  {bool}   forceUpdate Forces a state update without waiting for
-     *                              throttled event.          
+     *                              throttled event.
      * @return {undefined}
      */
     seek(time, forceUpdate) {
@@ -217,7 +233,7 @@ var Video = React.createClass({
      * Sets the video volume.
      * @param  {number} volume The volume level between 0 and 1.
      * @param  {bool}   forceUpdate Forces a state update without waiting for
-     *                              throttled event.  
+     *                              throttled event.
      * @return {undefined}
      */
     setVolume(volume, forceUpdate) {
@@ -246,6 +262,9 @@ var Video = React.createClass({
             muted: this.videoEl.muted,
             volume: this.videoEl.volume,
             readyState: this.videoEl.readyState,
+
+            // Play rate
+            playbackRate: this.videoEl.playbackRate,
 
             // Non-standard state computed from properties
             percentageBuffered: this.videoEl.buffered.length && this.videoEl.buffered.end(this.videoEl.buffered.length - 1) / this.videoEl.duration * 100,
